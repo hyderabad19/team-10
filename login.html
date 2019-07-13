@@ -43,7 +43,13 @@
 			alert("loggin in");			
 			var email = document.getElementById("email").value;
 			var password = document.getElementById("password").value;
-			firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+			console.log(email, password)
+			firebase.auth().signInWithEmailAndPassword(email, password)
+			.then((res)=>{
+				console.log(res);
+				window.location.href = "index.html";
+			})
+			.catch(function(error) {
 			  // Handle Errors here.
 			  var errorCode = error.code;
 			  var errorMessage = error.message;
@@ -53,7 +59,7 @@
 			});
 			console.log("signin successful");
 			alert("signin successful");
-			//window.location.href = "index.html";
+			// window.location.href = "index.html";
 		}
 	</script>
 		
