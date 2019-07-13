@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "",
+	    authDomain: "",
+	    databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+	    projectId: "cfgproject-5a81c",
+	    storageBucket: "",
+	    messagingSenderId: "332561097117",
+	    appId: "1:332561097117:web:2fe012c5193d867c"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+
+	New test page
+
+	<div id = "myTable">
+		
+	</div>
+  
+</table><br>
+<button onclick="myFunction()">Add new question</button>
+<button onclick="submitTest()">Post test</button>
+
+<script>
+	window.qcount = 0;
+function myFunction() {
+	window.qcount++;
+  var table = document.getElementById("myTable");
+  var label = document.createElement('label');
+  label.innerHTML = "Question " + String(window.qcount);
+
+  table.appendChild(label);
+  var question = document.createElement("input");
+  question.setAttribute("id", "question**" + String(window.qcount));
+  table.appendChild(question);
+  var br = document.createElement("br");
+  table.appendChild(br);
+  
+  for(var i=1;i<=4;i++)
+  {
+  	var clabel = document.createElement("label");
+  	clabel.innerHTML = "Choice " + String(i);
+  	table.append(clabel);
+  	var choice = document.createElement("input");
+  	choice.setAttribute("id", "choice**" + String(window.qcount) + "**" + String(i));
+  	table.appendChild(choice);
+  }
+  table.appendChild(br);
+  table.appendChild(document.createElement("hr"));
+
+}
+	function submitTest()
+	{
+		var database = firebase.database();
+		var ref = database.ref("/tests");
+		var test = {};
+		for(var i = 1;i<=window.qcount;i++)
+		{
+			console.log("question**" + String(i));
+			var qtext = document.getElementById("question**" + String(window.qcount)).value;
+			test["question" + String(i)] = qtext;
+			for(var j=1;j<4;j++)
+			{
+				var choice = document.getElementById("choice**" + String(i) + "**" + String(j)).value;
+				test["choice**" + String(i) + "**" + String(j)] = choice;
+
+			}
+
+		}
+		test["qcount"] = window.qcount;
+		var database = firebase.database().ref("/tests");
+		database.push(test);
+		console.log(test);
+
+
+	}
+
+</script>
+	<div id="yo">
+		
+	</div>
+
+	
+
+</body>
+</html>

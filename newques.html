@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "",
+	    authDomain: "",
+	    databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+	    projectId: "cfgproject-5a81c",
+	    storageBucket: "",
+	    messagingSenderId: "332561097117",
+	    appId: "1:332561097117:web:2fe012c5193d867c"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+
+	
+	<div id="yo">
+		
+	</div>
+
+
+
+
+	<div align="center">
+		Title <input type="text" name="" id ="title"><br>
+		Question <input type="text" name="" id="question">
+		<button onclick="postquestion()">Submit</button>
+	</div>
+
+	<script type="text/javascript">
+		function postquestion()
+		{
+			alert("sdkvjb");
+			var t = document.getElementById("title").value;
+			var q = document.getElementById("question").value;
+
+			var ques = {"title":t, "ques":q};
+			var ref = firebase.database().ref("/questions");
+			ref.push(ques);
+		}
+
+	
+
+	
+// 	console.log("logged out");
+
+
+	</script>
+
+</body>
+</html>
