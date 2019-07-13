@@ -28,47 +28,35 @@
 	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 
-	<a href="login.html">Login</a>
-	<a href="register.html">Register</a>
-	<a href="newtest.html">Post new test</a>
-	<a href="taketest.html"> Take test</a>
-	<a href="newques.html">New Question</a>
+	
 	<div id="yo">
 		
 	</div>
 
+
+
+
+	<div align="center">
+		Title <input type="text" name="" id ="title"><br>
+		Question <input type="text" name="" id="question">
+		<button onclick="postquestion()">Submit</button>
+	</div>
+
 	<script type="text/javascript">
+		function postquestion()
+		{
+			alert("sdkvjb");
+			var t = document.getElementById("title").value;
+			var q = document.getElementById("question").value;
 
-	firebase.auth().onAuthStateChanged(function(user) {
-	  if (user) {
-	  	alert("You are signed in ");
+			var ques = {"title":t, "ques":q};
+			var ref = firebase.database().ref("/questions");
+			ref.push(ques);
+		}
 
-	  	var mydiv = document.getElementById("yo");
-	  	var aTag = document.createElement("button");
-	  	aTag.setAttribute("onclick", "logout()");
-	  	aTag.innerHTML = "Logout";
-	  	mydiv.appendChild(aTag);
+	
 
-
-	    
-	  } else {
-	    // User is signed out.
-	    // ...
-
-	  }
-});
-
-	function logout()
-	{
-		console.log("logged out");
-		firebase.auth().signOut().then(function() {
-
-			location.reload();
-  // Sign-out successful.
-}).catch(function(error) {
-  // An error happened.
-});
-	}
+	
 // 	console.log("logged out");
 
 
