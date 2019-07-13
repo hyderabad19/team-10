@@ -2,8 +2,12 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
 
@@ -29,9 +33,96 @@
 	<script type="text/javascript" src="script.js"></script>
 
 	
-	<div id="yo">
-		
-	</div>
+	<div class="card" style="width: 18rem;" id="yo">
+  <ul class="list-group list-group-flush">
+    <!-- <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li> -->
+  </ul>
+</div>
+
+  <div class="card" style="width: 18rem;" id = "test">
+  <!-- <div class="card-header">
+    Featured
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul> -->
+</div>
+
+</div>
+	<script type="text/javascript">
+		var database = firebase.database().ref("/tests");
+		database.once('value').then(function(snapshot) {
+		  
+		  tests = snapshot.val();
+		  var i = 0;
+		  for (var key in tests)
+		  {
+		  	i++;
+		  	var mydiv = document.getElementById("yo");
+		  	var choice = document.createElement("li");
+		  	choice.setAttribute("class","list-group-item" );
+		  	choice.setAttribute("onclick", "showtest(" + String(i) + ")");
+		  	choice.innerHTML = "Test " + String(i);
+		  	mydiv.appendChild(choice)
+		  }
+		});
+
+		function showtest(testno)
+		{
+			var divtag = document.getElementById("yo").innerHTML = "";
+			var database = firebase.database().ref("/tests");
+		database.once('value').then(function(snapshot) {
+		  
+		  tests = snapshot.val();
+		  var i = 0;
+		  for (var key in tests)
+		  {
+		  	i++;
+		  	if(i == testno)
+		  	{
+		  		var questions = tests[key];
+		  		var n = Object.keys(questions).length/4;
+		  		for (var j =1 ;j<=n;j++)
+		  		{
+		  			var mydiv = document.getElementById("test");
+		  			var heading = document.createElement("div");
+		  			heading.setAttribute("class", "card-header");
+		  			heading.innerHTML = "Question "+String(j) + ": " + tests[key]["question" + String(j)];
+		  			mydiv.appendChild(heading);
+		  			var ul = document.createElement("ul");
+		  				ul.setAttribute("class","list-group list-group-flush");
+		  				mydiv.append(ul);
+
+		  			for(var k=1;k<=3;k++)
+		  			{
+		  				
+		  				var li = document.createElement("li");
+		  				li.setAttribute("class", "list-group-item");
+		  				//li.innerHTML = tests[key]["choice**" + String(j) + "**" + String(k)];
+		  				var input = document.createElement("input");
+		  				input.setAttribute("type", "radio");
+		  				input.setAttribute("name" , String(j));
+		  				li.appendChild(input);
+		  				var label = document.createElement("label");
+		  				label.innerHTML = tests[key]["choice**" + String(j) + "**" + String(k)];
+		  				li.appendChild(label);
+		  				ul.appendChild(li);
+
+		  			}
+
+
+		  		}
+		  		return;
+		  	}
+		  	
+		  }
+		});
+		}
+	</script>
 
 	
 
