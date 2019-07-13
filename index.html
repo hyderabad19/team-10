@@ -41,6 +41,9 @@
 					<li class="nav-item active">
 					  <a class="nav-link" href="newques.html">New Question</a>
 					</li>
+					<li class="nav-item active">
+							<a class="nav-link" href="chatbot.html">Chat</a>
+						  </li>
 				  </ul>
 				  <form class="form-inline my-2 my-lg-0">
 				  	
@@ -113,21 +116,46 @@
 				p.setAttribute('class','card-text');
 				p.innerHTML = temp['ques'];
 				subhead.appendChild(p);
-				var a1 = document.createElement('a');
-				a1.setAttribute('href','#');
-				a1.setAttribute('class','card-link');
-				subhead.appendChild(a1);
-				var a2 = document.createElement('a');
-				a2.setAttribute('href','#');
-				a2.setAttribute('class','card-link');
-				subhead.appendChild(a2);
+				// var a1 = document.createElement('a');
+				// a1.setAttribute('href','#');
+				// a1.setAttribute('class','card-link');
+				// subhead.appendChild(a1);
+				// var a2 = document.createElement('a');
+				// a2.setAttribute('href','#');
+				// a2.setAttribute('class','card-link');
+				// a2.innerHTML = 'heyyyyy';
+				var formelement = document.createElement("form");
+				formelement.setAttribute("action", "displayques.html");
+				formelement.setAttribute("method", "GET");
+
+				var inpkey = document.createElement("input");
+				inpkey.setAttribute("type", "hidden");
+				inpkey.setAttribute("value", key);
+				inpkey.setAttribute("name", "quesid");
+				formelement.appendChild(inpkey);
+
+				var submitkey = document.createElement("input");
+				submitkey.setAttribute("type", "submit");
+				submitkey.setAttribute("value", "View More");
+				formelement.appendChild(submitkey);
+
+				subhead.appendChild(formelement);
+
+
+
+
+
+				
 					
 			}
 		} );
 
 	firebase.auth().onAuthStateChanged(function(user) {
+
 	  if (user) {
-	  	alert("You are signed in ");
+	  	//("You are signed in ");
+	  	alert("hey");
+	  	console.log("hey");
 
 	  	var mydiv = document.getElementById("yo");
 	  	var aTag = document.createElement("button");
@@ -159,6 +187,7 @@
 
 
 	</script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
