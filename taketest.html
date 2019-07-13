@@ -28,51 +28,12 @@
 	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 
-	<a href="login.html">Login</a>
-	<a href="register.html">Register</a>
-	<a href="newtest.html">Post new test</a>
-	<a href="taketest.html"> Take test</a>
-	<a href="newques.html">New Question</a>
+	
 	<div id="yo">
 		
 	</div>
 
-	<script type="text/javascript">
-
-	firebase.auth().onAuthStateChanged(function(user) {
-	  if (user) {
-	  	alert("You are signed in ");
-
-	  	var mydiv = document.getElementById("yo");
-	  	var aTag = document.createElement("button");
-	  	aTag.setAttribute("onclick", "logout()");
-	  	aTag.innerHTML = "Logout";
-	  	mydiv.appendChild(aTag);
-
-
-	    
-	  } else {
-	    // User is signed out.
-	    // ...
-
-	  }
-});
-
-	function logout()
-	{
-		console.log("logged out");
-		firebase.auth().signOut().then(function() {
-
-			location.reload();
-  // Sign-out successful.
-}).catch(function(error) {
-  // An error happened.
-});
-	}
-// 	console.log("logged out");
-
-
-	</script>
+	
 
 </body>
 </html>
