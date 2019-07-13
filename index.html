@@ -99,21 +99,46 @@
 				p.setAttribute('class','card-text');
 				p.innerHTML = temp['ques'];
 				subhead.appendChild(p);
-				var a1 = document.createElement('a');
-				a1.setAttribute('href','#');
-				a1.setAttribute('class','card-link');
-				subhead.appendChild(a1);
-				var a2 = document.createElement('a');
-				a2.setAttribute('href','#');
-				a2.setAttribute('class','card-link');
-				subhead.appendChild(a2);
+				// var a1 = document.createElement('a');
+				// a1.setAttribute('href','#');
+				// a1.setAttribute('class','card-link');
+				// subhead.appendChild(a1);
+				// var a2 = document.createElement('a');
+				// a2.setAttribute('href','#');
+				// a2.setAttribute('class','card-link');
+				// a2.innerHTML = 'heyyyyy';
+				var formelement = document.createElement("form");
+				formelement.setAttribute("action", "displayques.html");
+				formelement.setAttribute("method", "GET");
+
+				var inpkey = document.createElement("input");
+				inpkey.setAttribute("type", "hidden");
+				inpkey.setAttribute("value", key);
+				inpkey.setAttribute("name", "quesid");
+				formelement.appendChild(inpkey);
+
+				var submitkey = document.createElement("input");
+				submitkey.setAttribute("type", "submit");
+				submitkey.setAttribute("value", "View More");
+				formelement.appendChild(submitkey);
+
+				subhead.appendChild(formelement);
+
+
+
+
+
+				
 					
 			}
 		} );
 
 	firebase.auth().onAuthStateChanged(function(user) {
+
 	  if (user) {
-	  	alert("You are signed in ");
+	  	//("You are signed in ");
+	  	alert("hey");
+	  	console.log("hey");
 
 	  	var mydiv = document.getElementById("yo");
 	  	var aTag = document.createElement("button");

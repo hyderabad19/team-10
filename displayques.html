@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyCQb69lVpLgi62Erj1BK7l8fvpc03PDY6s",
+	    authDomain: "cfgproject-5a81c.firebaseapp.com",
+	    databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+	    projectId: "cfgproject-5a81c",
+	    storageBucket: "",
+	    messagingSenderId: "332561097117",
+	    appId: "1:332561097117:web:2fe012c5193d867c"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand" href="#">DR Reddy's</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+			  
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				  <ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+					  <a class="nav-link" href="login.html">Login <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+					  <a class="nav-link" href="register.html">Register</a>
+					</li>
+					<li class="nav-item dropdown">
+					  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Tests
+					  </a>
+					  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="newtest.html">New Test</a>
+						<a class="dropdown-item" href="taketest.html">Take Test</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Something else here</a>
+					  </div>
+					</li>
+					<li class="nav-item active">
+					  <a class="nav-link" href="newques.html">New Question</a>
+					</li>
+				  </ul>
+				  <form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				  </form>
+				</div>
+			  </nav>
+	<div id="write"></div>
+
+	<!-- <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> -->
+<div id="question">
+	
+</div>
+
+	<script type="text/javascript">
+		var quesid = window.location.search.substring(8);
+		var ref = firebase.database().ref("/questions/" + quesid);
+		ref.once('value').then(function(snapshot) {
+		  var quesdata = snapshot.val();
+		  title = quesdata["title"];
+		  quesques = quesdata["ques"];
+		  var mydiv = document.getElementById("question");
+
+		  var card = document.createElement("div");
+		  card.setAttribute("class", "card");
+
+		  var header = document.createElement("h5");
+		  header.setAttribute("class", "card-title");
+		  header.innerHTML = title;
+
+		  card.appendChild(header);
+		   var ptag = document.createElement("p");
+		   ptag.setAttribute("class", "card-text");
+		   ptag.innerHTML = quesques;
+		   card.appendChild(ptag);
+
+
+
+
+		  mydiv.appendChild(card);
+
+
+		  // ...
+		});
+	</script>
+
+	
+
+	<div id="yo">
+		
+	</div>
+
+	
+
+</body>
+</html>
