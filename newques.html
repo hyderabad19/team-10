@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
@@ -36,22 +37,46 @@
 
 
 
-	<div align="center">
-		Title <input type="text" name="" id ="title"><br>
-		Question <input type="text" name="" id="question">
-		<button onclick="postquestion()">Submit</button>
+	<div align="center"class=''>
+			<div class="container">
+					<div class="jumbotron">
+					  <h1>Add a Question..!</h1>
+					  <!-- <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
+					  responsive, mobile-first projects on the web.</p> -->
+					</div>
+					<!-- <p>This is some text.</p>
+					<p>This is another text.</p> -->
+				  
+		 <div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <span class="input-group-text" id="basic-addon1">Title</span>
+				</div>
+				<input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" id = "title">
+			  </div>
+			<br> 
+		<!-- <input type="text" name="" id="question"> -->
+		<div class="input-group">
+				<div class="input-group-prepend">
+				  <span class="input-group-text">Question</span>
+				</div>
+				<textarea class="form-control" aria-label="With textarea"id = 'question' ></textarea>
+			  </div>
+			  <br>
+		<button class="btn btn-primary"onclick="postquestion()">Submit</button>
+	</div>
 	</div>
 
 	<script type="text/javascript">
 		function postquestion()
 		{
-			alert("sdkvjb");
+			
 			var t = document.getElementById("title").value;
 			var q = document.getElementById("question").value;
 
 			var ques = {"title":t, "ques":q};
 			var ref = firebase.database().ref("/questions");
 			ref.push(ques);
+			alert("success");
 		}
 
 	
@@ -61,6 +86,8 @@
 
 
 	</script>
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
