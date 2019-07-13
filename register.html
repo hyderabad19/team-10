@@ -71,7 +71,7 @@
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
 	  	var uid = user.uid;
-	  	userdata = {"email":email, "phoneno":phoneno, "uid":uid};
+	  	userdata = {"email":email, "phoneno":phoneno, "uid":uid, "score":"0"};
 	  	database.push(userdata);
 	  	console.log("user node added");
 

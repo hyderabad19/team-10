@@ -67,6 +67,24 @@
 	</div>
 
 	<script type="text/javascript">
+		firebase.auth().onAuthStateChanged(function(user) {
+
+	  if (user) {
+	  	//("You are signed in ");
+	  	window.curuid = user.uid;
+
+
+	    
+	  } else {
+	    // User is signed out.
+	    // ...
+
+	  }
+});
+
+
+
+
 		function postquestion()
 		{
 			
@@ -76,6 +94,26 @@
 			var ques = {"title":t, "ques":q};
 			var ref = firebase.database().ref("/questions");
 			ref.push(ques);
+
+			var newref = firebase.database().ref("/users");
+			newref.once("value").then(function(snapshot)
+			{
+				var data = snapshot.val();
+				for(var key in data)
+				{
+					if(data[key]["uid"] == window.curuid)
+					{
+						console.log(data[key]);
+						var curscore = Number(data[key]["score"]);
+						console.log(curscore);
+						var anref = firebase.database().ref("/users/" + key +"/score");
+						anref.set(String(curscore + 50));
+					}
+				}
+			})
+
+
+
 			alert("success");
 		}
 

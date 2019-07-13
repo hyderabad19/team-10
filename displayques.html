@@ -72,11 +72,58 @@
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div> -->
-<div id="question">
+<div align="center" class="container">
+	<div id="question">
+		
+	</div>
+
+	<div id="replies">
+		<h3>Replies</h3>
+
+		<br>
+		<br>
+	</div>
+
+
+	<div id="reply">
+		<br><br><br><br>
+
+		
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Leave a reply</label>
+	    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add relevant reply only">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  
+	  
+	  <button onclick="submitreply()"  class="btn btn-primary">Submit</button>
 	
+	</div>
 </div>
 
 	<script type="text/javascript">
+
+		firebase.auth().onAuthStateChanged(function(user) {
+
+	  if (user) {
+	  	//("You are signed in ");
+	  	window.curemail = user.email;
+	  	
+
+	  	console.log(user.email);
+
+
+	    
+	  } else {
+	    // User is signed out.
+	    // ...
+
+	  }
+});
+
+
+
+
 		var quesid = window.location.search.substring(8);
 		var ref = firebase.database().ref("/questions/" + quesid);
 		ref.once('value').then(function(snapshot) {
@@ -90,7 +137,7 @@
 
 		  var header = document.createElement("h5");
 		  header.setAttribute("class", "card-title");
-		  header.innerHTML = title;
+		  header.innerHTML = "Question: " + title;
 
 		  card.appendChild(header);
 		   var ptag = document.createElement("p");
@@ -102,15 +149,45 @@
 
 
 		  mydiv.appendChild(card);
+		  var replies = quesdata["replies"];
+		  if(replies!= null)
+		  {
+			  console.log(replies);
+			  for(var key in replies)
+			  {
+			  		var label = document.createElement("label");
+			  		if(true)
+			  		{
+				  		label.innerHTML = replies[key]["reply"];
+				  		document.getElementById("replies").appendChild(label);
+				  		document.getElementById("replies").appendChild(document.createElement("br"));
+				  	}
+				  	console.log(replies[key]);
+			  }
+			}
 
 
 		  // ...
 		});
+
+		function submitreply()
+		{
+			var reply = document.getElementById("exampleInputEmail1").value;
+			console.log(reply);
+			var repref = firebase.database().ref("/questions/" + window.location.search.substring(8) + "/replies");
+			var data = {"reply": window.curemail + ": " + reply};
+
+
+			repref.push(data);
+			console.log("done");
+			window.location.reload();
+		}
 	</script>
 
 	
 
 	<div id="yo">
+
 		
 	</div>
 
