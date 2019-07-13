@@ -36,9 +36,11 @@
 
 	<script type="text/javascript">
 		
+
 		function signInUser()
 		{
-			
+
+			alert("loggin in");			
 			var email = document.getElementById("email").value;
 			var password = document.getElementById("password").value;
 			firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -46,12 +48,12 @@
 			  var errorCode = error.code;
 			  var errorMessage = error.message;
 			  console.log(error);
-			  return;
+			  alert("error");
 			  // ...
 			});
 			console.log("signin successful");
 			alert("signin successful");
-			window.location.href = "index.html";
+			//window.location.href = "index.html";
 		}
 	</script>
 		

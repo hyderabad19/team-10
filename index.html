@@ -38,6 +38,7 @@
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
 	  	alert("You are signed in ");
+	  	
 	  	var mydiv = document.getElementById("yo");
 	  	var aTag = document.createElement("button");
 	  	aTag.setAttribute("onclick", "logout()");
@@ -49,7 +50,7 @@
 	  } else {
 	    // User is signed out.
 	    // ...
-	    console.log("yo");
+
 	  }
 });
 
