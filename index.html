@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyCQb69lVpLgi62Erj1BK7l8fvpc03PDY6s",
+	    authDomain: "cfgproject-5a81c.firebaseapp.com",
+	    databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+	    projectId: "cfgproject-5a81c",
+	    storageBucket: "",
+	    messagingSenderId: "332561097117",
+	    appId: "1:332561097117:web:2fe012c5193d867c"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+
+	<a href="login.html">Login</a>
+	<a href="register.html">Register</a>
+	<div id="yo">
+		
+	</div>
+
+	<script type="text/javascript">
+	firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
+	  	alert("You are signed in ");
+	  	var mydiv = document.getElementById("yo");
+	  	var aTag = document.createElement("button");
+	  	aTag.setAttribute("onclick", "logout()");
+	  	aTag.innerHTML = "Logout";
+	  	mydiv.appendChild(aTag);
+
+
+	    
+	  } else {
+	    // User is signed out.
+	    // ...
+	    console.log("yo");
+	  }
+});
+
+	function logout()
+	{
+		console.log("logged out");
+		firebase.auth().signOut().then(function() {
+
+			location.reload();
+  // Sign-out successful.
+}).catch(function(error) {
+  // An error happened.
+});
+	}
+// 	console.log("logged out");
+
+
+	</script>
+
+</body>
+</html>
