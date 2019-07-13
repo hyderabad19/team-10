@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+              apiKey: "",
+              authDomain: "",
+              databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+              projectId: "cfgproject-5a81c",
+              storageBucket: "",
+              messagingSenderId: "332561097117",
+              appId: "1:332561097117:web:2fe012c5193d867c"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+    </script>
+      
+          <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+          <script type="text/javascript" src="script.js"></script>
+<body>
+        User name:<br>
+        <input type="text" id="User" >
+        <br>
+        Phone Number:<br>
+        <input type="text" id="phn">
+        <br><br>
+        <button onclick="postquestion()">Refer</button>
+        
+       
+        <div id="yo">
+		
+            </div>
+        
+<script type="text/javascript">
+	
+	function postquestion() {
+
+            var t = document.getElementById("User").value;
+			var q = document.getElementById("phn").value;
+
+			var ques = {"username":t, "phoneno":q};
+			var ref = firebase.database().ref("/refer");
+			ref.push(ques);
+			alert("success");
+    }
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
