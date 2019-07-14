@@ -40,7 +40,7 @@
 	<div align="center"class=''>
 			<div class="container">
 					<div class="jumbotron">
-					  <h1>Add a Question..!</h1>
+					  <h1>Add a Video!</h1>
 					  <!-- <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
 					  responsive, mobile-first projects on the web.</p> -->
 					</div>
@@ -53,14 +53,16 @@
 				</div>
 				<input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" id = "title">
 			  </div>
+
+			  <div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <span class="input-group-text" id="basic-addon1">Link</span>
+				</div>
+				<input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" id = "link">
+			  </div>
 			<br> 
 		<!-- <input type="text" name="" id="question"> -->
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-			  <span class="input-group-text" id="basic-addon1">Question</span>
-			</div>
-			<input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" id = "question">
-		  </div>
+		
 			  <br>
 		<button class="btn btn-primary"onclick="postquestion()">Submit</button>
 	</div>
@@ -89,11 +91,15 @@
 		{
 			
 			var t = document.getElementById("title").value;
-			var q = document.getElementById("question").value;
+			var q = document.getElementById("link").value;
+			q = q.split("watch?v=")[0] + "embed/" + q.split("watch?v=")[1];
+			
+			
 
-			var ques = {"title":t, "ques":q};
-			var ref = firebase.database().ref("/questions");
+			var ques = {"title":t, "link":q};
+			var ref = firebase.database().ref("/videos");
 			ref.push(ques);
+
 
 			var newref = firebase.database().ref("/users");
 			newref.once("value").then(function(snapshot)
@@ -112,7 +118,7 @@
 				}
 			})
 			alert("QUestion successfuly posted");
-			window.location.href = "index.html"
+			window.location.href = "viewvid.html"
 
 
 

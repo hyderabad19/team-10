@@ -117,14 +117,14 @@
 	<div id = "questions"></div>
 
 	<script type="text/javascript">
-	var databaseURL = firebase.database().ref("/questions");
+	var databaseURL = firebase.database().ref("/videos");
 		databaseURL.once('value').then(function(snapshot){
 			var data = (snapshot.val());
 			for(var key in data){
 				temp = data[key];
 				var div = document.getElementById('questions');
 				var head = document.createElement('div');
-				head.setAttribute('class','card');
+				head.setAttribute('class','div');
 				head.setAttribute('style','width: 18rem;');
 				div.appendChild(head);
 				var subhead = document.createElement('div');
@@ -137,10 +137,20 @@
 				var h6 = document.createElement('h6');
 				h6.setAttribute('class','card-subtitle mb-2 text-muted');
 				subhead.appendChild(h6);
+
+				/*
 				var p = document.createElement('p');
 				p.setAttribute('class','card-text');
 				p.innerHTML = temp['ques'].substring(1, 50);
 				subhead.appendChild(p);
+				*/
+
+				var frame = document.createElement("iFrame");
+				frame.setAttribute("src", temp["link"]);
+				subhead.appendChild(frame);
+
+
+
 				// var a1 = document.createElement('a');
 				// a1.setAttribute('href','#');
 				// a1.setAttribute('class','card-link');
@@ -179,16 +189,7 @@
 	firebase.auth().onAuthStateChanged(function(user) {
 
 	  if (user) {
-	  	//("You are signed in ");
-	  	alert("Welcome " + user.email);
-	  	console.log("hey");
-
-	  	var mydiv = document.getElementById("yo");
-	  	var aTag = document.createElement("button");
-	  	aTag.setAttribute("onclick", "logout()");
-	  	aTag.setAttribute("class", "btn");
-	  	aTag.innerHTML = "Logout";
-	  	mydiv.appendChild(aTag);
+	  	
 
 
 	    
@@ -199,17 +200,7 @@
 	  }
 });
 
-	function logout()
-	{
-		console.log("logged out");
-		firebase.auth().signOut().then(function() {
-
-			location.reload();
-  // Sign-out successful.
-}).catch(function(error) {
-  // An error happened.
-});
-	}
+	
 // 	console.log("logged out");
 
 
