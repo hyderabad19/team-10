@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "",
+        authDomain: "",
+        databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+        projectId: "cfgproject-5a81c",
+        storageBucket: "",
+        messagingSenderId: "332561097117",
+        appId: "1:332561097117:web:2fe012c5193d867c"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+
+
+    <div id = "users"></div>
+    <!-- <div class="card" style="width: 18rem;"  >
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div> -->
+          </div>
+<h></h>
+    <script type="text/javascript">
+        var databaseURL = firebase.database().ref("/refer");
+        databaseURL.once('value').then(function(snapshot){
+            var data = (snapshot.val());
+            for(var key in data){
+                temp = data[key];
+                var div = document.getElementById('users');
+                var head = document.createElement('div');
+                head.setAttribute('class','card');
+                head.setAttribute('style','width: 18rem;');
+                div.appendChild(head);
+                var subhead = document.createElement('div');
+                subhead.setAttribute('class','card-body');
+                head.appendChild(subhead);
+                var h5 = document.createElement('h5');
+                h5.setAttribute('class','card-title');
+                h5.innerHTML = temp['username'];
+                subhead.appendChild(h5);
+                var h6 = document.createElement('h6');
+                h6.setAttribute('class','card-subtitle mb-2 text-muted');
+                subhead.appendChild(h6);
+                var p = document.createElement('p');
+                p.setAttribute('class','card-text');
+                p.innerHTML = temp['phoneno'];
+                subhead.appendChild(p);
+                
+                var a1 = document.createElement('a');
+                a1.setAttribute('href','#');
+                a1.setAttribute('class','card-link');
+                subhead.appendChild(a1);
+                var a2 = document.createElement('a');
+                a2.setAttribute('href','#');
+                a2.setAttribute('class','card-link');
+                subhead.appendChild(a2);
+                    
+            }
+        } );
+ 
+
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        alert("You are signed in ");
+        var mydiv = document.getElementById("yo");
+        var aTag = document.createElement("button");
+        aTag.setAttribute("onclick", "logout()");
+        aTag.innerHTML = "Logout";
+        mydiv.appendChild(aTag);
+
+
+        
+      } else {
+        // User is signed out.
+        // ...
+        console.log("yo");
+      }
+});
+
+    function logout()
+    {
+        console.log("logged out");
+        firebase.auth().signOut().then(function() {
+
+            location.reload();
+  // Sign-out successful.
+}).catch(function(error) {
+  // An error happened.
+});
+    }
+//  console.log("logged out");
+
+
+    </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

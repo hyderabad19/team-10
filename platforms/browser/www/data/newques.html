@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "",
+	    authDomain: "",
+	    databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+	    projectId: "cfgproject-5a81c",
+	    storageBucket: "",
+	    messagingSenderId: "332561097117",
+	    appId: "1:332561097117:web:2fe012c5193d867c"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+
+	
+	<div id="yo">
+		
+	</div>
+
+
+
+
+	<div align="center"class=''>
+			<div class="container">
+					<div class="jumbotron">
+					  <h1>Add a Question..!</h1>
+					  <!-- <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
+					  responsive, mobile-first projects on the web.</p> -->
+					</div>
+					<!-- <p>This is some text.</p>
+					<p>This is another text.</p> -->
+				  <h1></h1>
+		 <div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <span class="input-group-text" id="basic-addon1">Title</span>
+				</div>
+				<input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" id = "title">
+			  </div>
+			<br> 
+		<!-- <input type="text" name="" id="question"> -->
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+			  <span class="input-group-text" id="basic-addon1">Question</span>
+			</div>
+			<input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" id = "question">
+		  </div>
+			  <br>
+		<button class="btn btn-primary"onclick="postquestion()">Submit</button>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		firebase.auth().onAuthStateChanged(function(user) {
+
+	  if (user) {
+	  	//("You are signed in ");
+	  	window.curuid = user.uid;
+
+
+	    
+	  } else {
+	    // User is signed out.
+	    // ...
+
+	  }
+});
+
+
+
+
+		function postquestion()
+		{
+			
+			var t = document.getElementById("title").value;
+			var q = document.getElementById("question").value;
+
+			var ques = {"title":t, "ques":q};
+			var ref = firebase.database().ref("/questions");
+			ref.push(ques);
+
+			var newref = firebase.database().ref("/users");
+			newref.once("value").then(function(snapshot)
+			{
+				var data = snapshot.val();
+				for(var key in data)
+				{
+					if(data[key]["uid"] == window.curuid)
+					{
+						console.log(data[key]);
+						var curscore = Number(data[key]["score"]);
+						console.log(curscore);
+						var anref = firebase.database().ref("/users/" + key +"/score");
+						anref.set(String(curscore + 50));
+					}
+				}
+			})
+			alert("QUestion successfuly posted");
+			window.location.href = "index.html"
+
+
+
+			alert("success");
+		}
+
+	
+
+	
+// 	console.log("logged out");
+
+
+	</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
